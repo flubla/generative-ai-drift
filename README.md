@@ -123,6 +123,31 @@ Get your api keys from the URLs below
 
 
 # Vector Database
+Weaviate is a very easy-to-work-with vector db. I tried several of the usual suspects...
+
+The feature I like the most is the ability to create a schema with any properties or fields that are needed, and choose which fields will be vectorized.
+
+Weaviate was also super easy to use via docker. They also offer a cloud version.
+make sure you have docker engine and docker-compose installed and in your PATH.
+https://www.docker.com/products/docker-desktop/ 
+
+Weaviate has a docker-compose configuration tool on their site: 
+https://weaviate.io/developers/weaviate/installation/docker-compose
+
+I have included my docker-compose.yml 
+
+Then, from a cmd/ps/bash prompt:
+```
+docker-compose up -d
+```
+
+
+
+## Vector DB Visual Exploration
+https://atlas.nomic.ai/
+
+Click button labeled: Get Started with Atlas
+
 
 ## How to visualize weaviate data:
 https://docs.nomic.ai/vector_database.html#weaviate
@@ -131,11 +156,6 @@ implemented here:
  1. nomic.ipynb
  1. drift_nomic.ipynb
 
-
-## Vector DB Visual Exploration
-https://atlas.nomic.ai/
-
-Click button labeled: Get Started with Atlas
 
 
 
