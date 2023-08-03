@@ -1,21 +1,11 @@
 # Generative AI - Issue & Observability 
+Developing an observability solution for Generative AI semantic content drift.
+
+This is the companion project for the article...
 
 ## Contents Overview
 
-After you set up Python and VSCODE (as needed), set up 
-  1. Weaviate
-  2. Cohere account
-  3. Nomic Atlas account
-  4. SQLite
-
-Confirm external resources are working by running the scipits in: [data\confirm_external_resources.ipynb](data\confirm_external_resources.ipynb)
-
-
-Once it's all working, there are two paths you can follow:
-1. Learn and experiment by using the notebooks in the *dev_nb* directory
-2. ***Get straight to work creating the drift benchmarks*** with the notebooks in the *work_nb* directory.
-
-There are README files in the *dev_nb* and *work_nb* directories.  
+***N.B.*** There are README files in the *dev_nb* and *work_nb* directories.  
   
 
 ### Organization
@@ -47,6 +37,13 @@ You may them useful for learning and experimentation.
 These are the working notebooks that contain the all necessary code to get you from zer0 to drift benchmarks. These are also the files from which the article code snippets were taken.
 
 
+### Data Origin
+Data was harvested, cleaned and formatted from 
+https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered
+License: apache-2.0
+
+See: [work_nb\01_clean_data.ipynb](work_nb\01_clean_data.ipynb)
+
 ### Development Data in *data*
 You'll need clean data when you send it to the gen ai API or import into your vector database. 
 All data is located in *data* directorY
@@ -63,6 +60,14 @@ Data has been provided in a raw form and cleaned and formatted, ready for to use
 
 There are three files with cleaned data, suitable for use during development. The number in the file name is the number of json objects (chat pairs) in each file.
 
+
+#### Raw data files
+1. [data\raw\ShareGptChatPairs_3330.json](data\raw\ShareGptChatPairs_3330.json)
+2. [data\raw\ShareGptChatPairs_dev_10.json](data\raw\ShareGptChatPairs_dev_10.json)
+3. [data\raw\ShareGptChatPairs_dev_32.json](data\raw\ShareGptChatPairs_dev_32.json)
+
+
+#### Cleaned & formatted data files
 1. [data\clean\ShareGptChatPairs_2_clean_fmt.json](data\clean\ShareGptChatPairs_2_clean_fmt.json)
 2. [data\clean\ShareGptChatPairs_dev_10_cleaned.json](data\clean\ShareGptChatPairs_dev_10_cleaned.json)
 3. [data\clean\ShareGptChatPairs_2415_cleaned.json](data\clean\ShareGptChatPairs_2415_cleaned.json)
