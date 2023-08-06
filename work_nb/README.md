@@ -70,6 +70,9 @@ For example: *data\clean\ShareGptChatPairs_dev_10_cleaned.json*
 3. [Run the benchmark queries](work_nb\03_drift_benchmark_queries.ipynb)
 4. [Visualize and explore the benchmark data in a browser](work_nb\04_drift_nomic.ipynb)
 
+Each of the notebooks contains markdown explaining what is going on.
+
+### Explanation for #3. Run the benchmark queries 
 
 ### Weaviate connection error
 error getting credentials - err: exec: "docker-credential-desktop": executable file not found in %PATH%, out: ``

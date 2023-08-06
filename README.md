@@ -3,6 +3,54 @@ Developing an observability solution for Generative AI semantic content drift.
 
 This is the companion project for the article...
 
+First, a word of explanation about the collection of notebooks in this project. My goal was to make it as easy as possible for you to adapt my use case to your use case.
+
+Like you, I make great use of tutorials and open source code. And, like you, my use case is never quite the same as the use cases in the tutorials or open source code. Again, like you, I spend a lot of time understanding the code and adapting it to my use case. The notebooks in this project are the pieces of work I have done while adapting various bits of source code to the article's use case: ***building a way to monitor semantic content drift of a vendor-supplied generative AI system.*** 
+
+To get from nothing to a prototype, there are a number of text processing steps, and each of those steps has a separate notebook or part of a notebook. This should make it much easier for you to adapt this code to your use case.
+
+The steps involved in getting from A to Z are:
+
+1. Which Gen AI API will you be using?
+1. What kind of data (prompts and completions) will your use case require in order to create the benchmark sample dataset?
+1. If you don't have it already available, find something close enough in a public dataset like huggingface.co
+1. When you have it, clean and format it.
+1. Once your data set it cleaned and formatted, experiment with sentence embeddings and a few similarity functions.
+1. Once you have chose a embedding and similarity solution, maybe re-clean and re-format your data.
+1. Pick a Vector database (VBD) that works for your use case.
+1. Write the code to encode the embedding vectors and save to your VDB.
+1. Write the code to foreach the benchmark samples and send the prompts to the Gen AI API
+1. Calculate the embeddings for completions returned
+1. [Optional] Save the response completions and embedding in a VDB
+1. Calculate the similarity and save that to a db, relational probably, cause it's time series: one prompt will have many completions.
+1. Run this process every day or week
+1. Generate and distribute some kind of report on the results.
+
+***Bonus***: Once you've done semantic content drift, if you need it you can do factual accuracy drift/error and sentiment drift of your user's prompts. 
+
+Let me know if I have achieved my goal of making it easier for you to adapt this code to your use case.
+
+And, as always, ***have fun storming the castle!***
+
+~P
+
+## !Absolutely read this:
+The data provided in this project has one goal in mind: make development easy.
+
+The data in the raw and cleaned directories came from actual chats used when training the open source chatbot called Vicuna. 
+
+When you run the code in these notebooks using the cohere.ai completion API, you will receive very different completions from the completions in the raw data. This was done so that you (and I) don't write a bug because we get the benchmark sample completion mixed up with the daily/weekly completion from the actual API.
+
+Consider this: You write a a bunch of lovely prompts and send them to your favorite Gen AI completion API.
+You write this to JSON and use these prompts and completions as your dev data. It would be very easy to mix up *request["completion"]* with *response["completion"]* if the benchmark completion text in the vector db is identical to the API response completion text.
+
+Or, because both texts are identical, you mistakenly think you have a defect in code.
+
+That won't happen with the data I have provided because the benchmark completion text in the vector db is going to be very different from the API response completion text.
+
+Cheers!
+
+
 ## Contents Overview
 
 ***N.B.*** There are README files in the *dev_nb* and *work_nb* directories.  
@@ -34,7 +82,9 @@ These are files I wrote while developing this project.
 You may them useful for learning and experimentation. 
 
 ### Notebooks in *work_nb*
-These are the working notebooks that contain the all necessary code to get you from zer0 to drift benchmarks. These are also the files from which the article code snippets were taken.
+These are the working notebooks that contain the all necessary code to get you from zer0 to drift benchmarks. They are organized so that each step builds on the previous, and makes it easier for you to extract and adapt the code to your use case.
+
+These are also the files from which the article code snippets were taken.
 
 
 ### Data Origin
@@ -225,6 +275,11 @@ implemented here:
 
 ## 6. Generative AI Account Setup
 This project used a free API account at cohere.ai
+
+Cohere API Trial key is limited to 5 API calls/minute. 
+You can continue to use the Trial key for free or upgrade to a Production key with higher rate limits at 'https://dashboard.cohere.ai/api-keys'. 
+
+
 Open https://cohere.com/ 
 Click on Try Now button upper right corner.
 
@@ -238,9 +293,19 @@ SQLite is used to store the time-series data generated when we run the benchmark
 Setup is incredibly simple:
 https://www.sqlite.org/index.html
 
+Sqlite Tools:
+A bundle of command-line tools for managing SQLite database files, including the command-line shell program, the sqldiff.exe program, and the sqlite3_analyzer.exe program.
+
+and a GUI: https://sqlitestudio.pl/ 
+
 ### Create a project db
-A SQLite3 DB (\data\driftDb.db) is included. However, if you want to create your own: 
+A SQLite3 DB (data\driftDb.db) is included. 
+
+and the sql DDL/DML: data\benchmark.sql
+
+However, if you want to create your own: 
 https://www.sqlite.org/quickstart.html
+
 
 
 ## Confirm external resources are working:
